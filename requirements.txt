@@ -1,0 +1,23 @@
+# Core AI & LangChain
+langchain>=0.1.0
+langchain-openai
+langchain-community
+langgraph
+openai
+
+# Data & Finance
+yfinance
+pandas
+numpy
+matplotlib
+seaborn
+ta-lib  # Optional: for advanced indicators
+
+# Database & Graph
+neo4j
+
+# Utils
+python-dotenv
+pyyaml
+requests
+Pillow  # For image processing
