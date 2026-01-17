@@ -42,15 +42,22 @@
 이 레포지토리는 주제별 실험(Experiment) 단위로 구성될 예정입니다.
 
 ```bash
+
 Neural-Fusion-Lab/
-├── 📂 experiments/           # 개별 연구 프로젝트 및 실험 코드
+├── 📂 data/                  # 원천 데이터 (PDF, Images, CSV)
+├── 📂 modules/               # 핵심 모듈
+│   ├── __init__.py
+│   ├── agents.py             # Agent 정의 (Supervisor, Chart, News, Quant)
+│   ├── multimodal.py         # VLM(Vision Language Model) 처리 로직
 │   ├── 🧪 exp_01_advanced_hedging/  # (Planned) Deep Hedging with RL
 │   ├── 🧪 exp_02_graph_rag/         # (Planned) Financial Knowledge Graph
-│   └── ...
-├── 📂 modules/               # 재사용 가능한 핵심 모듈 (Agents, Data Loaders)
-├── 📂 legacy_refactor/       # 기존 프로젝트(PPO, ARIMA)의 현대적 리팩토링
-└── README.md
-
+│   ├── graph_rag.py          # Neo4j 연결 및 Graph Traversal
+│   └── tools.py              # 외부 API (yfinance, Tavily 등) 도구 모음
+├── 📂 models/                # Fine-tuned LoRA weights 저장소
+├── 📂 notebooks/             # 실험용 주피터 노트북 (EDA)
+├── main.py                   # 실행 진입점 (Orchestrator)
+├── config.yaml               # API Key 및 하이퍼파라미터
+└── requirements.txt
 ```
 
 ## 🛠️ Tech Stack & Tools
