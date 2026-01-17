@@ -49,6 +49,31 @@
 * **Evolution:**
     * **GraphRAG:** 기업 지배구조, 공급망 등 복잡한 관계를 **지식 그래프(Knowledge Graph)**로 시각화하고 추론.
     * **Multimodal Analysis:** 재무제표(텍스트)와 차트(이미지)를 동시에 이해하는 멀티모달 모델 연구.
+ 
+### 🧪 Exp 03: Structural Analysis of Financial Graphs
+
+**Objective:**
+단순한 노드 연결 분석을 넘어, 그래프 이론(Graph Theory)과 딥러닝을 결합하여 금융 네트워크 내의 **구조적 동형성(Isomorphism)**을 판별합니다. 자금 세탁 패턴(Money Laundering Ring)이나 순환 출자(Circular Shareholding)와 같은 특이 구조를 탐지하는 것이 목표입니다.
+
+**Mathematical Background:**
+* **Graph Isomorphism (GI):** 두 그래프가 구조적으로 동일한지 판별하는 문제로, 계산 복잡도 이론에서 **NP-intermediate**에 속하는 난제입니다.
+* **Subgraph Isomorphism:** 거대 그래프 내에서 특정 패턴 그래프와 동형인 부분집합을 찾는 문제(NP-Complete)입니다.
+
+**Methodology:**
+
+1.  **Exact Matching (Hard Approach):**
+    * **Algorithm:** VF2 Algorithm (via NetworkX)
+    * **Description:** 엄밀한 수학적 정의에 기반하여(Bijective mapping), 금융 사기 패턴(Fraud Pattern)과 정확히 일치하는 부분 그래프를 전수 조사합니다.
+    * **Use Case:** 규제 준수(Compliance)를 위한 명확한 증거 기반의 이상 거래 탐지.
+
+2.  **Neural Matching (Soft Approach):**
+    * **Model:** Graph Isomorphism Network (GIN)
+    * **Theory:** Weisfeiler-Lehman (WL) Test의 강력함에 기반하여, 그래프의 구조적 특징을 임베딩 벡터로 변환합니다.
+    * **Description:** 데이터의 노이즈나 미세한 변형이 있어도, 딥러닝 모델이 두 그래프 구조의 **유사도(Cosine Similarity)**를 산출하여 잠재적 위험군을 스코어링합니다.
+
+**Code Structure:**
+* `experiments/03_structural_analysis/exact_matcher.py`: Implementation of Subgraph Isomorphism for fraud detection.
+* `experiments/03_structural_analysis/neural_matcher.py`: PyTorch Geometric implementation of GIN for structural embedding.
 
 ## 🏗️ System Architecture
 
