@@ -1,0 +1,12 @@
+models:
+  supervisor: "gpt-4-turbo"
+  vision: "gpt-4o"  # 멀티모달용
+  text: "gpt-3.5-turbo"
+
+parameters:
+  lookback_period: "1y"
+  rsi_threshold: 30
+  
+paths:
+  chart_save_dir: "./data/charts"
+  log_dir: "./logs"
