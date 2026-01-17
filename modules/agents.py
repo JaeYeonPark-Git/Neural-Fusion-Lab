@@ -1,60 +1,49 @@
-from typing import TypedDict, Annotated, Sequence
-import operator
-from langchain_core.messages import BaseMessage, HumanMessage
-from langchain_openai import ChatOpenAI
-from langgraph.graph import StateGraph, END
+import matplotlib.pyplot as plt
+import os
+from .tools import MarketDataManager
+from .multimodal import VisionAnalyst
+from langchain_core.messages import HumanMessage
 
-# 1. State 정의: 에이전트 간 공유할 메모리
-class AgentState(TypedDict):
-    messages: Annotated[Sequence[BaseMessage], operator.add]
-    stock_symbol: str
-    chart_analysis: str
-    news_sentiment: str
-    quant_metrics: dict
-    final_decision: str
-
-# 2. Vision Agent: 차트 이미지를 보고 패턴 분석 (Multimodal)
 class ChartAgent:
-    def __init__(self, model_name="gpt-4o"): # or Gemini Pro Vision
-        self.llm = ChatOpenAI(model=model_name)
-    
-    def analyze(self, state: AgentState):
-        symbol = state['stock_symbol']
-        # 실제로는 여기서 이미지 경로를 로드하거나 캡처하는 로직 필요
-        # [Image of candlestick chart for {symbol}]
-        chart_image_path = f"data/{symbol}_daily_chart.png" 
-        
-        prompt = "이 주식 차트의 추세(Trend)와 지지/저항선을 분석해줘."
-        # 멀티모달 입력 처리 로직 (생략)
-        response = "상승 쐐기형 패턴이 관찰되며 20일 이평선 지지 중."
-        
-        return {"chart_analysis": response, "messages": [HumanMessage(content=f"Chart Analysis: {response}")]}
+    def __init__(self, config):
+        self.data_manager = MarketDataManager()
+        self.vision_analyst = VisionAnalyst(model_name=config['models']['vision'])
+        self.chart_dir = config['paths']['chart_save_dir']
+        os.makedirs(self.chart_dir, exist_ok=True)
 
-# 3. Graph RAG Agent: 뉴스와 지식그래프 분석
-class KnowledgeAgent:
-    def __init__(self):
-        # Neo4j Connection 초기화
-        pass
+    def _generate_and_save_chart(self, symbol: str) -> str:
+        """데이터를 받아 차트를 그리고 이미지 파일로 저장"""
+        df = self.data_manager.get_price_history(symbol)
+        df = self.data_manager.add_technical_indicators(df)
         
-    def analyze(self, state: AgentState):
-        symbol = state['stock_symbol']
-        # Neo4j Cypher Query 실행 -> Supply Chain 리스크 등 파악
-        insight = "공급망 내 주요 벤더의 파산 리스크가 감지됨."
-        return {"news_sentiment": "Negative", "messages": [HumanMessage(content=f"Knowledge Insight: {insight}")]}
+        # Matplotlib로 차트 그리기 (스타일링 적용)
+        plt.figure(figsize=(10, 6))
+        plt.plot(df.index, df['Close'], label='Close Price')
+        plt.plot(df.index, df['SMA_20'], label='SMA 20', linestyle='--')
+        plt.title(f"{symbol} Price Chart Analysis")
+        plt.legend()
+        plt.grid(True)
+        
+        save_path = os.path.join(self.chart_dir, f"{symbol}_chart.png")
+        plt.savefig(save_path)
+        plt.close() # 메모리 해제
+        return save_path
 
-# 4. Supervisor (Decision Maker)
-class SupervisorAgent:
-    def __init__(self):
-        self.llm = ChatOpenAI(model="gpt-4-turbo")
+    def analyze(self, state):
+        """LangGraph 노드에서 호출될 메인 함수"""
+        symbol = state['stock_symbol']
+        print(f"📈 [ChartAgent] Generating and analyzing chart for {symbol}...")
         
-    def decide(self, state: AgentState):
-        # 모든 분석 결과를 종합하여 최종 투자의견 도출
-        prompt = f"""
-        Chart: {state.get('chart_analysis')}
-        News: {state.get('news_sentiment')}
-        Quant: {state.get('quant_metrics')}
+        # 1. 차트 생성 및 저장
+        image_path = self._generate_and_save_chart(symbol)
         
-        위 정보를 바탕으로 Buy/Sell/Hold 중 하나를 결정하고 이유를 설명해.
-        """
-        decision = self.llm.invoke(prompt).content
-        return {"final_decision": decision}
+        # 2. VLM을 통한 이미지 분석
+        analysis_result = self.vision_analyst.analyze_chart(image_path)
+        
+        print(f"✅ [ChartAgent] Analysis Complete.")
+        
+        # 3. 결과 반환 (State 업데이트)
+        return {
+            "chart_analysis": analysis_result,
+            "messages": [HumanMessage(content=f"Chart Analysis for {symbol}:\n{analysis_result}")]
+        }
