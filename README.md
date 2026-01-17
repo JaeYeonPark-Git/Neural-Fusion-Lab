@@ -54,7 +54,7 @@
 
 이 프로젝트는 **Stateful Multi-Agent Architecture**를 채택하여, 에이전트 간의 메시지 흐름과 상태(State)를 엄격하게 관리합니다.
 
-```mermaid
+```
 graph TD
     User((User)) -->|Input Ticker| Supervisor[🕵️ Supervisor Agent]
     
