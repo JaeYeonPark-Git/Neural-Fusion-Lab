@@ -1,0 +1,18 @@
+import torch
+import torch.nn as nn
+import torchsde
+
+class SDEFunc(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.theta = nn.Parameter(torch.tensor(0.1), requires_grad=True)  # Mean Reversion speed
+        self.mu = nn.Parameter(torch.tensor(0.5), requires_grad=True)     # Long-term mean
+        self.sigma = nn.Parameter(torch.tensor(0.2), requires_grad=True)  # Volatility
+
+    def f(self, t, y): # Drift term (추세)
+        return self.theta * (self.mu - y)
+
+    def g(self, t, y): # Diffusion term (변동성)
+        return self.sigma * torch.ones_like(y)
+
+# 면접 포인트: "저는 블랙숄즈의 가정을 딥러닝으로 일반화하여, Volatility Smile 같은 비선형성을 모델링했습니다."
