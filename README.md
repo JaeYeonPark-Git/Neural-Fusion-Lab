@@ -11,79 +11,74 @@
 
 ## 📖 About This Lab
 
-**Neural Fusion Lab**은 금융공학(Financial Engineering)과 최신 인공지능(Modern AI) 기술의 융합을 탐구하는 실험적 연구 공간(Sandbox)입니다.
+**Neural Fusion Lab**은 금융공학(Financial Engineering)과 최신 인공지능(Modern AI) 기술의 융합을 탐구하는 **실험적 연구 공간(Research Sandbox)**입니다.
 
-이 레포지토리의 주된 목적은 **"Evolution (진화)"**입니다.
-기존에 수행했던 정통적인 퀀트/시계열 프로젝트(ARIMA, PPO 등)를 그대로 두지 않고, **최신 SOTA(State-of-the-Art) 아키텍처**와 **새로운 패러다임(Multi-Agent, GraphRAG)**을 적용하여 한 단계 더 발전시키는 것을 목표로 합니다.
+이 레포지토리는 완성된 프로덕트가 아닌, **"Evolution (진화)"**을 목표로 하는 일련의 **실험(Experiments)**들을 기록합니다. 기존의 정통적인 퀀트 모델을 베이스라인(Legacy)으로 삼아, 최신 SOTA 아키텍처와 새로운 패러다임(Multi-Agent, GraphRAG)을 적용했을 때의 효용성을 검증합니다.
 
-## 📖 Project Overview
+---
 
-**Neural Fusion Lab**은 정통 금융공학(Quantitative Finance)과 최신 에이전트 AI(Agentic AI) 기술을 결합한 차세대 금융 분석 시스템입니다.
+## 🧪 Research Tracks & Experiments
 
-기존의 단순 수치 분석을 넘어, **LangGraph** 기반의 멀티 에이전트 협업 시스템을 구축하여 다음과 같은 복합적인 추론을 수행합니다.
+현재 본 연구실에서는 아래 3가지 핵심 트랙을 중심으로 실험을 진행하고 있습니다.
 
-* **Vision Analyst:** 주가 차트 이미지를 시각적으로 분석(VLM)하여 기술적 패턴 식별.
-* **Knowledge Analyst:** 기업 지배구조 및 공급망 데이터를 지식 그래프(Neo4j)로 탐색하여 리스크 진단.
-* **Quant Analyst:** 시계열 데이터 및 기술적 지표(RSI, MACD 등)를 계산.
-* **Supervisor:** 위 모든 정보를 종합하여 최적의 투자의견(Buy/Sell/Hold) 도출.
+### Track 1. 🧬 Evolution of Legacy Models (모델 고도화 실험)
+> **Hypothesis:** "딥러닝 기반의 생성형 모델이 전통적 통계 모델의 경직성을 극복할 수 있는가?"
 
-## 🚀 Research Direction (연구 방향)
-
-현재 이 연구실은 다음과 같은 방향으로 기존 코드들을 리팩토링하고 확장할 계획입니다.
-
-### 1. 🧬 Evolution of Legacy Models (기존 모델의 고도화)
-* **Legacy:** 기존의 `ARIMA`, `LSTM`, `PPO` 기반의 단일 모델 접근법.
-* **Evolution:**
-    * **TimeSeries Foundation Models:** Chronos, TimeGPT 등을 활용한 제로샷 예측 성능 검증.
+* **Legacy (Baseline):** 기존의 `ARIMA`, `LSTM`, `PPO` 기반의 단일 모델 접근법.
+* **Evolution (Experimental):**
+    * **TimeSeries Foundation Models:** Chronos, TimeGPT 등을 활용한 제로샷 예측 성능 검증 실험.
     * **Deep Hedging:** 고전적 델타 헷징을 넘어선 강화학습(RL) 기반의 비선형 헷징 전략 연구.
-    * **Neural SDEs:** 데이터를 통해 미분방정식을 직접 학습하는 생성형 시계열 모델링.
+    * **Neural SDEs:** 데이터를 통해 확률 미분방정식(SDE)을 직접 학습하는 생성형 시계열 모델링 실험.
 
-### 2. 🤖 Agentic Workflow (에이전트 기반 워크플로우)
-* **Legacy:** 사람이 직접 피처를 가공하고 모델을 돌리는 수동 프로세스.
-* **Evolution:**
-    * **Multi-Agent Systems:** 데이터 수집, 차트 분석, 리스크 관리를 각각 담당하는 AI 에이전트 협업 시스템 구축.
-    * **Auto-Quant:** 투자 가설 설정부터 백테스팅까지 스스로 수행하는 자율형 퀀트 에이전트 실험.
+### Track 2. 🤖 Agentic Workflow (에이전트 오케스트레이션 실험)
+> **Hypothesis:** "단일 LLM을 넘어선 전문 에이전트 협업 체계가 금융 분석의 신뢰도를 높일 수 있는가?"
 
-### 3. 🧠 Knowledge-Driven AI (지식 기반 AI)
-* **Legacy:** 단순 텍스트 검색(Simple RAG)이나 키워드 매칭.
-* **Evolution:**
-    * **GraphRAG:** 기업 지배구조, 공급망 등 복잡한 관계를 **지식 그래프(Knowledge Graph)**로 시각화하고 추론.
-    * **Multimodal Analysis:** 재무제표(텍스트)와 차트(이미지)를 동시에 이해하는 멀티모달 모델 연구.
- 
-### 🧪 Exp 03: Structural Analysis of Financial Graphs
+* **Legacy (Baseline):** 사람이 직접 피처를 가공하고 모델을 트리거하는 수동 프로세스.
+* **Evolution (Experimental):**
+    * **Multi-Agent Systems:** LangGraph를 활용해 데이터 수집, 차트 분석, 리스크 관리를 분담하는 에이전트 협업 시스템 구축 및 상태 관리(State Management) 실험.
+    * **Auto-Quant:** 투자 가설 설정부터 백테스팅 코드 작성까지 스스로 수행하는 **자율형 퀀트(Autonomous Quant)** 에이전트 프로토타이핑.
+
+### Track 3. 🧠 Knowledge-Driven AI (지식 기반 추론 실험)
+> **Hypothesis:** "단순 검색(Search)을 넘어선 구조적 추론(Reasoning)이 리스크 탐지에 유효한가?"
+
+* **Legacy (Baseline):** 단순 텍스트 유사도 기반의 검색(Simple RAG)이나 키워드 매칭.
+* **Evolution (Experimental):**
+    * **GraphRAG:** 기업 지배구조, 공급망 등 복잡한 관계를 **지식 그래프(Knowledge Graph)**로 시각화하고 2차 파급 효과를 추론하는 실험.
+    * **Multimodal Analysis:** 재무제표(텍스트)와 차트(이미지)를 동시에 이해하는 VLM(Vision-Language Model) 기반 분석 실험.
+
+---
+
+## 🔬 Deep Dive: Active Experiment
+**현재 중점적으로 진행 중인 개별 연구 주제입니다.**
+
+### [Exp 03] Structural Analysis of Financial Graphs
 
 **Objective:**
-단순한 노드 연결 분석을 넘어, 그래프 이론(Graph Theory)과 딥러닝을 결합하여 금융 네트워크 내의 **구조적 동형성(Isomorphism)**을 판별합니다. 자금 세탁 패턴(Money Laundering Ring)이나 순환 출자(Circular Shareholding)와 같은 특이 구조를 탐지하는 것이 목표입니다.
+단순한 노드 연결 분석을 넘어, **그래프 이론(Graph Theory)**과 **딥러닝**을 결합하여 금융 네트워크 내의 **구조적 동형성(Isomorphism)**을 판별합니다. 자금 세탁 패턴(Money Laundering Ring)이나 순환 출자(Circular Shareholding)와 같은 특이 구조를 탐지하는 것이 목표입니다.
 
-**Mathematical Background:**
-* **Graph Isomorphism (GI):** 두 그래프가 구조적으로 동일한지 판별하는 문제로, 계산 복잡도 이론에서 **NP-intermediate**에 속하는 난제입니다.
-* **Subgraph Isomorphism:** 거대 그래프 내에서 특정 패턴 그래프와 동형인 부분집합을 찾는 문제(NP-Complete)입니다.
+**Theoretical Background:**
+* **Graph Isomorphism (GI):** 두 그래프가 구조적으로 동일한지 판별하는 난제 (NP-intermediate).
+* **Subgraph Isomorphism:** 거대 그래프 내에서 특정 패턴 그래프와 동형인 부분집합을 찾는 문제 (NP-Complete).
 
 **Methodology:**
-
 1.  **Exact Matching (Hard Approach):**
     * **Algorithm:** VF2 Algorithm (via NetworkX)
-    * **Description:** 엄밀한 수학적 정의에 기반하여(Bijective mapping), 금융 사기 패턴(Fraud Pattern)과 정확히 일치하는 부분 그래프를 전수 조사합니다.
-    * **Use Case:** 규제 준수(Compliance)를 위한 명확한 증거 기반의 이상 거래 탐지.
-
+    * **Description:** 엄밀한 수학적 정의(Bijective mapping)에 기반하여, 정의된 금융 사기 패턴과 정확히 일치하는 부분 그래프를 전수 조사.
 2.  **Neural Matching (Soft Approach):**
     * **Model:** Graph Isomorphism Network (GIN)
-    * **Theory:** Weisfeiler-Lehman (WL) Test의 강력함에 기반하여, 그래프의 구조적 특징을 임베딩 벡터로 변환합니다.
-    * **Description:** 데이터의 노이즈나 미세한 변형이 있어도, 딥러닝 모델이 두 그래프 구조의 **유사도(Cosine Similarity)**를 산출하여 잠재적 위험군을 스코어링합니다.
+    * **Description:** Weisfeiler-Lehman (WL) Test 기반의 GNN을 활용하여, 노이즈가 섞인 데이터에서도 두 그래프 구조의 **유사도(Cosine Similarity)**를 산출하여 스코어링.
 
-**Code Structure:**
-* `experiments/03_structural_analysis/exact_matcher.py`: Implementation of Subgraph Isomorphism for fraud detection.
-* `experiments/03_structural_analysis/neural_matcher.py`: PyTorch Geometric implementation of GIN for structural embedding.
+---
 
-## 🏗️ System Architecture
+## 🏗️ Experimental Architecture
 
-이 프로젝트는 **Stateful Multi-Agent Architecture**를 채택하여, 에이전트 간의 메시지 흐름과 상태(State)를 엄격하게 관리합니다.
+이 프로젝트는 단일 스크립트가 아닌, **Stateful Multi-Agent Architecture**를 실험적으로 채택하여 에이전트 간의 메시지 흐름을 제어합니다.
 
-```
+```mermaid
 graph TD
     User((User)) -->|Input Ticker| Supervisor[🕵️ Supervisor Agent]
     
-    subgraph "Agentic Workflow (LangGraph)"
+    subgraph "Experimental Agentic Workflow"
         Supervisor -->|Route| Chart[📈 Chart Analyst\n(GPT-4o Vision)]
         Supervisor -->|Route| Knowledge[🕸️ Knowledge Analyst\n(Neo4j GraphRAG)]
         Supervisor -->|Route| Quant[🧮 Quant Analyst\n(Technical Indicators)]
@@ -94,8 +89,6 @@ graph TD
     end
     
     Supervisor -->|Final Decision| User
-
-```
 
 ## 📂 Lab Structure (예정)
 
