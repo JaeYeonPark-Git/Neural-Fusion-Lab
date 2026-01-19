@@ -89,25 +89,31 @@ graph TD
     end
     
     Supervisor -->|Final Decision| User
+```
 
 ## 📂 Lab Structure (예정)
 
-이 레포지토리는 주제별 실험(Experiment) 단위로 구성될 예정입니다.
+이 레포지토리는 안정적인 **핵심 모듈(Modules)**과 다양한 시도를 수행하는 **실험실(Experiments)**로 구분됩니다.
 
 ```bash
 Neural-Fusion-Lab/
-├── 📂 data/                  # Generated charts & Raw financial data
-├── 📂 modules/               # Core Logic Modules
-│   ├── __init__.py
+├── 📂 modules/               # [Stable] 재사용 가능한 핵심 컴포넌트
 │   ├── agents.py             # LangGraph Nodes & Supervisor Logic
 │   ├── multimodal.py         # VLM Engine (Image Encoding & Prompting)
 │   ├── graph_rag.py          # Neo4j Connector & Cypher Query Engine
 │   └── tools.py              # Market Data Fetcher (yfinance wrapper)
-├── 📂 notebooks/             # EDA & Prototype Experiments
-├── main.py                   # Entry Point (Graph Compilation & Execution)
-├── config.yaml               # Model Configs & Hyperparameters
-├── requirements.txt          # Python Dependencies
-└── README.md                 # Project Documentation
+│
+├── 📂 experiments/           # [Sandbox] 주제별 연구 및 실험 코드
+│   ├── 🧪 exp_01_advanced_rag/        # (Completed) Financial Text Analysis
+│   ├── 🧪 exp_02_multimodal_chart/    # (Completed) VLM based Technical Analysis
+│   ├── 🧪 exp_03_structural_analysis/ # (Active) Graph Isomorphism & GIN
+│   └── 🧪 exp_04_neural_sde/          # (Planned) SDE learning from Data
+│
+├── 📂 data/                  # Experiment Data (Generated Charts, CSVs)
+├── 📂 notebooks/             # EDA & Prototyping Jupyter Notebooks
+├── main.py                   # System Entry Point
+├── config.yaml               # Experiment Configuration
+└── requirements.txt
 ```
 
 ## 🚀 Key Features & Implementation
