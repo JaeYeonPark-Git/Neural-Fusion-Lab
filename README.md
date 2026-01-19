@@ -74,7 +74,7 @@
 
 이 프로젝트는 단일 스크립트가 아닌, **Stateful Multi-Agent Architecture**를 실험적으로 채택하여 에이전트 간의 메시지 흐름을 제어합니다.
 
-```mermaid
+```bash
 graph TD
     User((User)) -->|Input Ticker| Supervisor[🕵️ Supervisor Agent]
     
